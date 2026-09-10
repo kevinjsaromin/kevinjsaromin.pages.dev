@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>
+            Layout Designer - Portfolio Project Blog
+        </title>
+        <link rel="stylesheet" href="css/layout.css">
+    </head>
+    <body class="body">
+        <div class="content">
+            <h1>Layout Designer</h1>
+            <a href="/">Home</a>
+            <p>Updated on February 6, 2024.</p>
+            <p>I started the layout designer in 2020 during  the pandemic. It began because, at the time, I would play online escape games with my high school friends. I became obsessed with the idea of these escape games having encounters and environments which are randomly generated.</p>
+            <p>Two years after graduating, in 2022, I decided to revisit it. </p>
+            <iframe src="https://player.vimeo.com/video/751405126?h=ddc4f75c2c" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>Initially the big idea for this algorithm involved taking a cube part and splitting it in half, then repeatedly doing this and generating walls at the end. Above shows the result: hundreds upon hundreds of randomly generated room layouts.</p>
+            <p>I realized the idea had potential, but I also realized that it could only work with squares and 90 degree angles. So I decided to make it more applicable.</p>
+            <iframe src="https://player.vimeo.com/video/781592677?h=c6007032e8" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>A couple of months later I reapproached the idea with a Cut subalgorithm, which takes in a shape and an arbitrary line and slices the shape into different pieces.</p>
+            <iframe src="https://player.vimeo.com/video/781601485?h=a4463099b9" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>Then those said pieces could be built into walkable spaces.</p>
+            <iframe src="https://player.vimeo.com/video/782408271?h=72150205e2" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>What was great about this version was that it allowed for angled cuts. This added infinitely more variety to the kinds of shapes and spaces that I could generate. I was able to get cuts from really irregular shapes which was impossible before.</p>
+            <iframe src="https://player.vimeo.com/video/792162304?h=58f32f90a0" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>Occasionally there would be a glitch and the cut would fail due to issues with numeric stablity. So I implemented a cut renderer to scan for any irregular results or clipping issues. As I worked on it, I got the algorithm to have a near-flawless success rate. Above shows a video of the revised algorithm at work, each frame being a new cut, with no glitches.</p>
+            <iframe src="https://player.vimeo.com/video/792515159?h=b461c48e7e" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>Here's another video, but with each frame having multiple cuts.</p>
+            <p>Behind the scenes, I did a lot of brainstorming. I searched for ways to generate spaces with more intention and figured that the best way to accomplish this was to upgrade from a cut algorhtm to a clipping algorithm such as negation, intersection, and union.</p>
+            <p>After a lot of revising and reapproaching throughout the years, I redesigned the entite system from the ground up based around a widely known concept: a Venn diagram.</p>
+            <iframe src="https://player.vimeo.com/video/909854785?h=a0f2912a5a" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>Intersection, negation, and union happen when you overlap two shapes much like a Venn diagram. Think of union as the combined two shapes, intersection as the area included by the two shapes, and negation as one shape clipped by the other shape.</p>
+            <p>It took lots of drawing and testing to figure out how to code this and which direction to go when an intersection is encountered.</p>
+            <img src="2024_02_03_0n1_Kleki.png" width="640" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <img src="2024_02_03_0r1_Kleki.png" width="640" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <img src="2024_02_03_01c_Kleki.png" width="640" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <img src="2024_02_03_01g_Kleki.png" width="640" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <img src="2024_02_04_0rh_Kleki.png" width="640" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <!-- <img src="2024_02_03_0n1_Kleki.png" alt="Flowers in Chania"> -->
+            <p>Eventually, I got it right, however.</p>
+            <!-- <p>Back in a Computer Graphics class I took as part of my CS courses, I learned about a crucial item called a buffer which stores things like </p> -->
+            <iframe src="https://player.vimeo.com/video/909942216?h=75cbeae0b8" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>Here is the finished result of the Venn subalgorithm, which takes two shapes and calculates all four (intersection, union, left negation, and right negation) from an overlap.</p>
+            <p>This algorithm became the building block for a schematics system, which uses the Venn algorithm to subdivide areas as well as carve new areas from scratch.</p>
+            <iframe src="https://player.vimeo.com/video/910623956?h=f7d46dd8e6" width="640" height="564" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <p>I then developed a node based editor that intuitively lets me use the Venn algorithm in tandem with other algorithms I designed along the way. I made an area building algorithm, which uses triangulation to fill in an area with Parts, and a perimeter building algorithm, which traces the current shape and places Parts along its perimeter.</p>
+            <p>As of February 2024, this is the current progress of the system.</p>
+            <p>Continuing this algorithm will mean finishing this node-based editor and experimenting with ways to make it more intuitive and interactive.</p>
+            
+            <a href="https://breezy-cattle-f26.notion.site/Keys-e88839e4b0df4c6082435a8deead1341?pvs=4">View Generator Keys</a>
+            <a href="https://www.roblox.com/games/16204690062/Schematics-Test">Schematics Test</a>
+            <!-- <h1>Generators</h1>
+            <ul>
+                <li>
+                    Add Door - Not implemented yet.
+
+                    Add Geometry - Adds a geometry to a schematic.
+                    
+                    Build Area - Fills the area with 3D geometry using a given offset and height.
+                    
+                    Build Perimeter - Fills the perimeter with 3D geometry using a given offset, height, and thickness.
+                    
+                    Find Area - Calculates the area.
+                    
+                    Find Perimeter - Calculates the perimeter.
+                    
+                    Generate from Intrude - Intrudes or shrinks one or more geometries by a given amount.
+                    
+                    Generate from Reverse - Flips one or more geometries inside out.
+                    
+                    Generate from Venn - Takes two sets of geometries and finds the union, intersection, and negations of them.
+                    Generate Square from Geometries - Takes a set of geometries and generates a square from one of their vertices.
+                    Generate Square from Vertex - Generates a square from a vertex.
+                    
+                    Get Geometries - Gets the geometries of the given schematic.
+                    
+                    Insert Schematic - Inserts a new schematic into the current one.
+                    
+                    Select - Selects an object from a list of objects.
+                    
+                    Select Geometry - Selects a geometry from a given schematic’s geometries.
+                    
+                    Select Vertex - Selects a vertex from a given geometry.
+                    
+                    Set Color From HSV - Sets the color of a set of given parts using hue, saturation, and value properties.
+                    
+                    Set Color From RGB - Sets the color of a set of given parts using red, green, and blue properties.
+                    
+                    Set Color From Hex - Sets the color of a set of given parts using a hex property.
+                    
+                    Set Material - Sets the material of a set of given parts.
+                </li>
+            </ul>
+            <h1>Schematics</h1>
+            <ul>
+                <li>Blank - A blank schematic.
+
+                    Expansion - A schematic demonstrating expansion of the current schematic.
+                    
+                    Intrusion - A schematic demonstrating intrusion of the current shematic.
+                    
+                    Lobby - Similar to an intrusion, but with a table in the center.
+                    
+                    Platform - A platform schematic.
+                    
+                    Room - A platform schematic with walls and a ceiling.
+                    
+                    Table - A simple schematic that generates a table.
+                    
+                    Yard - A platform schematic with walls.
+                </li>
+            </ul>
+            <h1>Materials</h1>
+            
+            <a href="https://create.roblox.com/docs/parts/materials#base-materials">For a list of materials, refer to this website (under "2022 Base -> Materials")!</a>
+            <h1>Test</h1>
+            <a href="https://www.roblox.com/games/16204690062/Schematics-Test">Test the designer!</a>
+        </div> -->
+    </body>
+</html>
